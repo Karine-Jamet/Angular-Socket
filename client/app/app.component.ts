@@ -1,13 +1,15 @@
 import {Component,OnInit} from 'angular2/core';
 import {SocketService} from './socket.service';
+import {Connection} from './socket.service';
 
 @Component({
     selector: 'my-app',
     template:`
   <h1>Truc</h1>
+  <connect></connect>
 <input type="text" [(ngModel)]="check" name="name" placeholder="your name"/>
 <input type="submit" (click)="sendToCheck(check)" />`,
-providers: [SocketService]
+providers: [SocketService, Connection]
 
 })
 
