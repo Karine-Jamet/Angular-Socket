@@ -5,7 +5,7 @@ import {Injectable} from 'angular2/core';
 export class SocketService {
 
   sock: any;
-  url: string = 'http://127.0.0.1:9999/gggg';
+  url: string = 'http://127.0.0.1:9998/gggg';
 
   // sock.send('test');
   // sock.close();
