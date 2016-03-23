@@ -35,6 +35,13 @@ router.get('/', function(req, res) {
     res.cookie('visitCount', req.session.visitCount, { maxAge: 900000, httpOnly: false});
     res.json({ message: 'You have visited this page ' + req.session.visitCount + ' times' });
 });
+router.post('/connection', function(req, res) {
+    //res.json({ message: 'Hello from API documentation...' });
+    //req.session.test = "test";
+    console.log(req.body);
+
+    res.json({ message: 'You have visited this page 1 times' });
+});
 
 
 router.post('/', function(req, res) {
@@ -46,3 +53,4 @@ router.post('/', function(req, res) {
 });
 
 module.exports = router;
+

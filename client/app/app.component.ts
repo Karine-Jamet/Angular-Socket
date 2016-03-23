@@ -1,5 +1,6 @@
 import {Component,OnInit} from 'angular2/core';
 import {SocketService} from './socket.service';
+import {Connection} from './connect.component';
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
@@ -13,13 +14,11 @@ import {Headers, RequestOptions} from 'angular2/http';
     <input type="submit" (click)="sendToCheck(check)" />
     `,
     providers: [HTTP_PROVIDERS, SocketService]
-
 })
 
 
 export class AppComponent implements OnInit {
   constructor(private _socketService: SocketService, private http: Http){}
-  // constructor(private _heroService: HeroService){}
 
   check: string;
 
@@ -29,9 +28,9 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this._socketService.connect();
-    
+
     console.log('ngOnInit');
-    this.getTest();
+    // this.getTest();
   }
 
  getTest() {
