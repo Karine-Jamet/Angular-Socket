@@ -1,14 +1,21 @@
 import {Injectable} from 'angular2/core';
-
+import {Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class SocketService {
 
+  constructor (private http: Http) {}
+
   sock: any;
   url: string = 'http://127.0.0.1:9998/gggg';
+  private _urlTest = 'http://127.0.0.1:9998/api/';  // URL to web api
 
-  // sock.send('test');
-  // sock.close();
+  getTest () {
+    return this.http.get(this._urlTest)
+                    .map(res => res.json().data)
+                     .catch(this.handleError);
+  }
 
   public connect() {
     console.log("connect");

@@ -36,4 +36,13 @@ router.get('/', function(req, res) {
     res.json({ message: 'You have visited this page ' + req.session.visitCount + ' times' });
 });
 
+
+router.post('/', function(req, res) {
+  console.log(req.body);
+  //  req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
+   
+    //res.cookie('visitCount', req.session.visitCount, { maxAge: 900000, httpOnly: false});
+    res.json({ message: 'Ok' });
+});
+
 module.exports = router;
