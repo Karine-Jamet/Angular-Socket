@@ -10,6 +10,7 @@ import {Headers, RequestOptions} from 'angular2/http';
   selector: 'my-app',
   template:`
       <h1>Truc</h1>
+      <connect></connect>
     <input type="text" [(ngModel)]="check" name="name" placeholder="your name"/>
     <input type="submit" (click)="sendToCheck(check)" />
     `,
