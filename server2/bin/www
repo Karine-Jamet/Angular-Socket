@@ -16,12 +16,6 @@ var port = normalizePort(process.env.PORT || '9998');
 app.set('port', port);
 
 
-
-
-
-
-
-
 /**
  * Create HTTP server.
  */
@@ -32,10 +26,9 @@ var sockjs = require('sockjs');
 var echo = sockjs.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js' });
 echo.on('connection', function(conn) {
     conn.on('data', function(message) {
-      console.log(JSON.parse(message).msg);
-
-
-        conn.write(JSON.stringify(message));
+      console.log(conn.id);
+      
+      conn.write(JSON.stringify(message));
     });
     conn.on('close', function() {});
 });

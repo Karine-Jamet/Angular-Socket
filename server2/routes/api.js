@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var cookieSession = require('cookie-session');
 
 //var newUser = require('../our_modules/fillDb').getNewUser();
 //var newQuestion = require('../our_modules/fillDb').getNewQuestion();
@@ -25,7 +26,11 @@ router.use(function(req, res, next) {
  **********************************************************************************/
 
 router.get('/', function(req, res) {
-    res.json({ message: 'Hello from API documentation...' }); 
+    //res.json({ message: 'Hello from API documentation...' });
+    //req.session.test = "test";
+    req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
+    //res.send('You have visited this page ' + req.session.visitCount + ' times');
+    res.json({ message: 'You have visited this page ' + req.session.visitCount + ' times' });
 });
 
 module.exports = router;

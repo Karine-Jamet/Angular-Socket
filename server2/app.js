@@ -5,6 +5,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var http = require('http');
 
@@ -25,6 +26,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.set('trust proxy', 1) // trust first proxy
+
+app.use(cookieSession({ secret: 'Ceciestunecleprivee' })); // session secret
+
 
 // api accessible via ➜ http://localhost:port/api
 app.use('/api', routes);
