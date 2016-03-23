@@ -28,8 +28,11 @@ router.use(function(req, res, next) {
 router.get('/', function(req, res) {
     //res.json({ message: 'Hello from API documentation...' });
     //req.session.test = "test";
+    console.log(req.session.visitCount);
     req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
     //res.send('You have visited this page ' + req.session.visitCount + ' times');
+    //res.json({ message: 'You have visited this page ' + req.session.visitCount + ' times' });
+    res.cookie('visitCount', req.session.visitCount, { maxAge: 900000, httpOnly: false});
     res.json({ message: 'You have visited this page ' + req.session.visitCount + ' times' });
 });
 

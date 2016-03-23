@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var http = require('http');
+var cookies = require( "cookies" );
 
 var routes = require('./routes/api');
 
@@ -28,13 +29,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.set('trust proxy', 1) // trust first proxy
-
-app.use(cookieSession({ secret: 'Ceciestunecleprivee' })); // session secret
+app.use(cookieSession({ secret: 'Ceciestunecleprivee', httpOnly: false })); // session secret
 
 
 // api accessible via ➜ http://localhost:port/api
 app.use('/api', routes);
-
 
 
 /*******************************************************************************
