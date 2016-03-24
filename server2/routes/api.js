@@ -4,9 +4,10 @@ var express = require('express');
 var router = express.Router();
 var cookieSession = require('cookie-session');
 
-//var newUser = require('../our_modules/fillDb').getNewUser();
-//var newQuestion = require('../our_modules/fillDb').getNewQuestion();
-//var newResponse = require('../our_modules/fillDb').getNewResponse();
+// module authentification
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10); // salage
 
 /**********************************************************************************
  * 					  Middleware ➜ to use for all requests
@@ -38,9 +39,11 @@ router.get('/', function(req, res) {
 router.post('/connection', function(req, res) {
     //res.json({ message: 'Hello from API documentation...' });
     //req.session.test = "test";
-    console.log(req.body);
-
-    res.json({ message: 'You have visited this page 1 times' });
+    var hash = bcrypt.hashSync(req.body.username, salt);
+    console.log(hash);
+    var token = jwt.sign(hash, "monsupersecret", {expiresInMinutes: 60 * 5});
+    //console.log(token);
+    res.json({ message: 'You have visited this page 1 times', token : token });
 });
 
 

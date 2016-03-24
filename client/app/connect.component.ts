@@ -39,9 +39,9 @@ console.log(n+p);
     })
       .map(res => res.json())
       .subscribe(
-       data => console.log(data),
-      // err => this.logError(err),
-      () => console.log('Authentication Complete')
+       data => console.log(data.token),
+       err => console.log(err),
+       //() => console.log('Authentication Complete')
       );
 
   }
