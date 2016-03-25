@@ -32,6 +32,7 @@ export class ConnectComponent {
   data: object;
   private _token: string;
   isConnect=false;
+  isDisconnect=true;
 
   constructor(private _socketService: SocketService, private http: Http){}
 
@@ -52,6 +53,7 @@ export class ConnectComponent {
           console.log(this._token);
           this._socketService.sock.send(JSON.stringify({ token: this._token}));
           this.isConnect=true;
+          this.isDisconnect=false;
         },
         err => console.log(err),
         //() => console.log('On Completed')

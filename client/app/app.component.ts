@@ -10,9 +10,11 @@ import {Headers, RequestOptions} from 'angular2/http';
   selector: 'my-app',
   template:`
       <h1>Angular2 SockJS Cloud Unit</h1>
-      <connect></connect>
-    <input type="text" [(ngModel)]="check" name="name" placeholder="your name"/>
-    <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" (click)="sendToCheck(check)" />
+      <connect #connection ></connect>
+      <div [ngClass]="{hide: connection.isDisconnect }" >
+          <input type="text" [(ngModel)]="check" name="name" placeholder="your name"/>
+          <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" (click)="sendToCheck(check)" />
+    </div>
     `,
     providers: [HTTP_PROVIDERS, SocketService],
     directives: [ConnectComponent]
