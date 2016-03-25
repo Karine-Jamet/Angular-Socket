@@ -10,8 +10,7 @@ import {SocketService} from './socket.service';
 @Component({
   selector: 'connect',
   template: `
-
-  <div class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp">
+  <div [ngClass]="{hide: isConnect}" class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp">
     <div class="mdl-card__title">
       <h2 class="mdl-card__title-text">Connect to CloudUnit</h2>
     </div>
@@ -32,6 +31,7 @@ import {SocketService} from './socket.service';
 export class ConnectComponent {
   data: object;
   private _token: string;
+  isConnect=false;
 
   constructor(private _socketService: SocketService, private http: Http){}
 
@@ -40,7 +40,8 @@ export class ConnectComponent {
     var headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post('http://192.168.2.13:9998/api/connection',
+    // this.http.post('http://192.168.2.13:9998/api/connection',
+    this.http.post('http://localhost:9998/api/connection',
       JSON.stringify({ username: username, password: password }),
       { headers: headers }
     )
@@ -50,6 +51,7 @@ export class ConnectComponent {
           this._token = data.token;
           console.log(this._token);
           this._socketService.sock.send(JSON.stringify({ token: this._token}));
+          this.isConnect=true;
         },
         err => console.log(err),
         //() => console.log('On Completed')
