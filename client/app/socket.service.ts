@@ -9,7 +9,7 @@ export class SocketService {
 
   sock: any;
 
-  private _otherPerson : any;
+  private _otherPerson = [];
 
   const private _urlSocket: string = 'http://127.0.0.1:9998/websocket';
   const private _urlApi: string = 'http://127.0.0.1:9998/api';
@@ -33,11 +33,22 @@ export class SocketService {
     };
 
     this.sock.onmessage = function(e) {
-      console.log('message', e);
-      /*if(e.data.type == "id") {
-        this._otherPerson.push(e.data);
+      
+      if (JSON.parse(e.data).type == "id") {
+
+        // TODO : Why?
+        if (this._otherPerson === undefined) {
+          this._otherPerson = [];
+        }
+        
+        this._otherPerson.push(JSON.parse(e.data).data);
+        console.log(this._otherPerson);
+      } else if (JSON.parse(e.data).type == "Myid") {
+        this._id = JSON.parse(e.data).data;
+        console.log(this._id);
+      } else if (JSON.parse(e.data).type == "message") {
+        console.log(JSON.parse(e.data).data);
       }
-      console.log(this._otherPerson);*/
     };
 
     this.sock.onclose = function() {
@@ -65,18 +76,19 @@ export class SocketService {
   }
 
   public sendToMe(msg) {
-    let data = JSON.stringify({ msg: msg, to : this_id });
+    let data = JSON.stringify({ msg: msg, to : this._id });
     this.sock.send(data);
   }
 
   public sendToOne(msg) {
-    let data = JSON.stringify({ msg: msg, to : _otherPerson[0] });
+    //console.log("sendToOne service");
+    let data = JSON.stringify({ msg: msg, to : this._otherPerson[0] });
     this.sock.send(JSON.stringify({ data: data }));
   }
 
 
   public sendToAll(msg) {
-    let data = JSON.stringify({ msg: msg, to : _otherPerson });
+    let data = JSON.stringify({ msg: msg, to : this._otherPerson });
     this.sock.send(JSON.stringify({ data: data }));
   }
 }

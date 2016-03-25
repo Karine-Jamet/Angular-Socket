@@ -14,7 +14,7 @@ import {Headers, RequestOptions} from 'angular2/http';
     
     <form (ngSubmit)="sendToMe()" #formToMe="ngForm" novalidate>
       <label>Ecrire a moi :</label>
-      <input type="text" [(ngModel)]="msg1" ngControl="msg1Control" #msg1Control="ngForm" placeholder="My message" required/>
+      <input type="text" [(ngModel)]="msg1" ngControl="msg1Control" #msg1Control="ngForm" placeholder="My message" autofocus required/>
       <p [hidden]="msg1Control.valid">
         Message is required
       </p>
@@ -63,6 +63,7 @@ export class AppComponent implements OnInit {
   }
 
   public sendToOne() {
+    //console.log("sendToOne");
     this._socketService.sendToOne(this.msg2);
   }
 
@@ -72,10 +73,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this._socketService.connect();
-
-    this._socketService.sock.onmessage = function(e) {
-      console.log('OKKKKKKKKKK');
-    };
   }
 
 }
