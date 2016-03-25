@@ -20,12 +20,11 @@ export class SocketService {
   }
 
   public connect() {
-    console.log("connect");
    this.sock = new SockJS(this.url);
 
     this.sock.onopen = function() {
        console.log('open');
-      // this.send(JSON.stringify({msg : "hello"}));
+       this.send(JSON.stringify({msg : "hello"}));
     };
     this.sock.onmessage = function(e) {
         console.log('message', e.data);
@@ -34,6 +33,8 @@ export class SocketService {
         console.log('close');
     };
   }
+
+
 
 
 

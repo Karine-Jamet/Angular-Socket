@@ -37,21 +37,13 @@ router.get('/', function(req, res) {
     res.json({ message: 'You have visited this page ' + req.session.visitCount + ' times' });
 });
 router.post('/connection', function(req, res) {
-    //res.json({ message: 'Hello from API documentation...' });
-    //req.session.test = "test";
     var hash = bcrypt.hashSync(req.body.username, salt);
-    console.log(hash);
     var token = jwt.sign(hash, "monsupersecret", {expiresInMinutes: 60 * 5});
-    //console.log(token);
-    res.json({ message: 'You have visited this page 1 times', token : token });
+    res.json({ message: 'You are connected!!!', token : token });
 });
 
 
 router.post('/', function(req, res) {
-  console.log(req.body);
-  //  req.session.visitCount = req.session.visitCount ? req.session.visitCount + 1 : 1;
-   
-    //res.cookie('visitCount', req.session.visitCount, { maxAge: 900000, httpOnly: false});
     res.json({ message: 'Ok' });
 });
 
