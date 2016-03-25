@@ -24,9 +24,16 @@ var server = http.createServer(app);
 var jwt = require('jsonwebtoken');
 var sockjs = require('sockjs');
 
+// Objet contenant l'ensemble des connections
+var connections = {};
+
 var echo = sockjs.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js' });
 echo.on('connection', function(conn) {
   conn.authenticated = false;
+
+  connections[conn.id] = {
+    connection: conn
+  };
 
   //console.log(conn);
     conn.on('data', function(message) {
@@ -38,8 +45,17 @@ echo.on('connection', function(conn) {
           if(!decoded) {
             //conn.close();
           } else {
-            console.log("okkk");
-             conn.authenticated = true;
+            conn.authenticated = true;
+
+            Object.keys(connections).forEach(function(id) {
+              if(connections[id].connection.id !== conn.id) {
+                connections[id].connection.write(JSON.stringify({
+                  type: "id",
+                  data: id
+                }));  
+              }
+            });
+
           }
         });
       }
@@ -47,7 +63,7 @@ echo.on('connection', function(conn) {
     });
     conn.on('close', function() {});
 });
-echo.installHandlers(server, {prefix:'/gggg'});
+echo.installHandlers(server, {prefix:'/websocket'});
 
 
 
