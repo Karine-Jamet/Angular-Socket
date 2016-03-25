@@ -38,8 +38,24 @@ echo.on('connection', function(conn) {
   //console.log(conn);
     conn.on('data', function(message) {
       if(conn.authenticated) {
-        console.log("message receive");
-        conn.write(JSON.stringify(message));  
+/*
+        Object.keys(JSON.parse(message).data.to).forEach(function(id) {
+          console.log(id);
+        });*/
+var lol = JSON.parse(JSON.parse(message).data);
+        console.log(lol);
+        console.log(lol.to);
+
+
+        for(var test = 0; test < lol.to.length; test++) {
+          console.log(test);
+          connections[lol.to[test]].connection.write(JSON.stringify({
+            type: "message",
+            data: lol.msg
+          }));  
+        }
+        //console.log("message receive");
+        //conn.write(JSON.stringify(message));  
       } else {
         jwt.verify(JSON.parse(message).token, 'monsupersecret', function(err, decoded) {
           if(!decoded) {
@@ -51,7 +67,13 @@ echo.on('connection', function(conn) {
               if(connections[id].connection.id !== conn.id) {
                 connections[id].connection.write(JSON.stringify({
                   type: "id",
-                  data: id
+                  data: conn.id
+                }));  
+              } else {
+                console.log("MyId");
+                connections[id].connection.write(JSON.stringify({
+                  type: "Myid",
+                  data: conn.id
                 }));  
               }
             });

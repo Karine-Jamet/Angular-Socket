@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
   }
 
   public sendToAll() {
-    this._socketService.sock.sendToAll(this.msg3);
+    this._socketService.sendToAll(this.msg3);
   }
 
   ngOnInit() {
