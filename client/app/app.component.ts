@@ -12,7 +12,7 @@ import {Headers, RequestOptions} from 'angular2/http';
       <h1>Angular2 SockJS Cloud Unit</h1>
       <connect></connect>
     <input type="text" [(ngModel)]="check" name="name" placeholder="your name"/>
-    <input type="submit" (click)="sendToCheck(check)" />
+    <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" (click)="sendToCheck(check)" />
     `,
     providers: [HTTP_PROVIDERS, SocketService],
     directives: [ConnectComponent]

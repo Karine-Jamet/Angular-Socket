@@ -8,10 +8,10 @@ export class SocketService {
   constructor (private http: Http) {}
 
   sock: any;
-  // url: string = 'http://192.168.2.13:9998/gggg';
+  url: string = 'http://192.168.2.13:9998/gggg';
 
-  url: string = 'http://127.0.0.1:9998/gggg';
-  private _urlTest = 'http://127.0.0.1:9998/api/';  // URL to web api
+  // url: string = 'http://127.0.0.1:9998/gggg';
+  private _urlTest = 'http://192.168.2.13:9998/api/';  // URL to web api
 
   getTest () {
     return this.http.get(this._urlTest)
