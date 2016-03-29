@@ -1,13 +1,13 @@
 import {Component,OnInit} from 'angular2/core';
-import {SocketService} from './socket.service';
-import {ConnectComponent} from './connect.component';
+import {SocketService} from './services/socket/socket.service';
+import {ConnectComponent} from './components/connect/connect.component';
 import {HTTP_PROVIDERS}    from 'angular2/http';
-import {Http, Response} from 'angular2/http';
+import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {Headers, RequestOptions} from 'angular2/http';
 
 @Component({
   selector: 'my-app',
+<<<<<<< HEAD
   template:`
       <h1>Angular2 SockJS Cloud Unit</h1>
       <connect #connection ></connect>
@@ -18,42 +18,37 @@ import {Headers, RequestOptions} from 'angular2/http';
     `,
     providers: [HTTP_PROVIDERS, SocketService],
     directives: [ConnectComponent]
+=======
+  templateUrl: './app/app.component.html',
+  providers: [HTTP_PROVIDERS, SocketService],
+  directives: [ConnectComponent]
+>>>>>>> connect
 })
 
 
 export class AppComponent implements OnInit {
   constructor(private _socketService: SocketService, private http: Http){}
 
-  check: string;
+  msg1: string;
+  msg2: string;
+  msg3: string;
+  msgReceives: string[] = [];
 
-  sendToCheck = function(e){
-    //envoyer en socket
-    this._socketService.sock.send(JSON.stringify({msg : e}));
+  public sendToMe() {
+    this._socketService.sendToMe(this.msg1);
   }
+
+  public sendToOne() {
+    //console.log("sendToOne");
+    this._socketService.sendToOne(this.msg2);
+  }
+
+  public sendToAll() {
+    this._socketService.sendToAll(this.msg3);
+  }
+
   ngOnInit() {
     this._socketService.connect();
-
-    console.log('ngOnInit');
-    // this.getTest();
-  }
-
- getTest() {
-   /*this.http.get('http://127.0.0.1:9998/api/')
-     .map((res: Response) => res.json())
-      .subscribe(
-      data => { console.log(data); },
-        err => console.error(err),
-        () => console.log('done')
-      );*/
- let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-   this.http.post('http://127.0.0.1:9998/api/', JSON.stringify({ name: "lol" }), options)
-     .map((res: Response) => res.json())
-      .subscribe(
-      data => { console.log(data); },
-        err => console.error(err),
-        () => console.log('done')
-      );
   }
 
 }
