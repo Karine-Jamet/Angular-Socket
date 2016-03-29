@@ -1,9 +1,25 @@
-<h2>Formulaire d'authentification</h2>
+<!--<h2>Formulaire d'authentifisefesfesfescation</h2>
 <form *ngIf="!_isAuthenticated" novalidate>
   <input type="text" [(ngModel)]="name" placeholder="your name"/>
   <input type="password" [(ngModel)]="password" placeholder="your password"/>
   <input type="submit" (click)="authentication()" />
-</form>
+</form>-->
 <p *ngIf="_isAuthenticated">
   Bienvenue, {{ _username }}
 </p>
+
+<div *ngIf="!_isAuthenticated" class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Connect to CloudUnit</h2>
+  </div>
+  <div class="mdl-card__media ">
+      <img src="app/images/logo-cloudunit.png" width="220" height="auto" border="0" alt="" style="padding:20px;">
+  </div>
+  <div class="mdl-card__supporting-text">
+      <input type="text" [(ngModel)]="name" placeholder="your name"/>
+      <input type="password" [(ngModel)]="password" placeholder="your password"/>
+  </div>
+  <div class="mdl-card__actions">
+      <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="authentication()"/>
+  </div>
+</div>

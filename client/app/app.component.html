@@ -7,7 +7,7 @@
   <p [hidden]="msg1Control.valid">
     Message is required
   </p>
-  <button type="submit" [disabled]="!formToMe.form.valid" >Send</button>
+  <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" [disabled]="!formToMe.form.valid" >Send</button>
 </form>
 
 <form novalidate (ngSubmit)="sendToOne()" #formToOne="ngForm">
@@ -16,7 +16,7 @@
   <p [hidden]="msg2Control.valid">
     Message is required
   </p>
-  <button type="submit" [disabled]="!formToOne.form.valid" >Send</button>
+  <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" [disabled]="!formToOne.form.valid" >Send</button>
 </form>
 
 
@@ -26,10 +26,12 @@
   <p [hidden]="msg3Control.valid">
       Message is required
   </p>
-  <button type="submit" [disabled]="!formToAll.form.valid" >Send</button>
+  <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" [disabled]="!formToAll.form.valid" >Send</button>
 </form>
 
 <h2>Message reçu</h2>
 <p *ngFor="#msgReceive of msgReceives;">
   {{msgReceive}}
 </p>
+
+

@@ -9,17 +9,8 @@ import {SocketService} from '../../services/socket/socket.service';
 
 @Component({
   selector: 'connect',
-  template: `
-  <h2>Formulaire d'authentification</h2>
-  <form *ngIf="!_isAuthenticated" novalidate>
-    <input type="text" [(ngModel)]="name" placeholder="your name"/>
-    <input type="password" [(ngModel)]="password" placeholder="your password"/>
-    <input type="submit" (click)="authentication()" />
-  </form>
-  <p *ngIf="_isAuthenticated">
-    Bienvenue, {{ _username }}
-  </p>
-  `,
+  styleUrls: ['app/components/connect/connect.component.css'],
+  templateUrl: 'app/components/connect/connect.component.html',
   providers: [HTTP_PROVIDERS]
 
 })

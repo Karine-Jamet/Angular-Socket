@@ -10,9 +10,24 @@ import {SocketService} from '../../services/socket/socket.service';
 @Component({
   selector: 'connect',
   styleUrls: ['./app/components/connect.component.css'],
-  templateUrl: './app/components/connect.component.html',
+  template: `
+  <div class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Connect to CloudUnit</h2>
+  </div>
+  <div class="mdl-card__media ">
+      <img src="app/images/logo-cloudunit.png" width="220" height="auto" border="0" alt="" style="padding:20px;">
+  </div>
+  <div class="mdl-card__supporting-text">
+      <input type="text"  name="nameC" placeholder="your name"/>
+      <input type="password" name="passwordC" placeholder="your password"/>
+  </div>
+  <div class="mdl-card__actions">
+      <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="sendToConnect(name,password)"/>
+  </div>
+</div>`,
+  //templateUrl: './app/components/connect.component.html',
   providers: [HTTP_PROVIDERS]
-
 })
 export class ConnectComponent {
   name : string;
