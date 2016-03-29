@@ -1,6 +1,6 @@
 import {Component,OnInit} from 'angular2/core';
-import {SocketService} from './socket.service';
-import {ConnectComponent} from './connect.component';
+import {SocketService} from './services/socket.service';
+import {ConnectComponent} from './components/connect.component';
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
@@ -9,6 +9,7 @@ import {Headers, RequestOptions} from 'angular2/http';
 @Component({
   selector: 'my-app',
   template:`
+
     <h1>Angular2 SockJS Cloud Unit</h1>
     <connect></connect>
     

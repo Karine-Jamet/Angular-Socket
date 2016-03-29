@@ -3,7 +3,7 @@ import {Headers, RequestOptions} from 'angular2/http';
 import {HTTP_PROVIDERS}   from 'angular2/http';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {SocketService} from './socket.service';
+import {SocketService} from '../services/socket.service';
 
 
 
@@ -24,7 +24,6 @@ import {SocketService} from './socket.service';
 
 })
 export class ConnectComponent {
-
   name : string;
   password: string;
   private _isAuthenticated: boolean = false;
